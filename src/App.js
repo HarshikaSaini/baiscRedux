@@ -1,20 +1,25 @@
-import {useSelector,useDispatch} from "react-redux";
-import {Increment, Decrement} from "./Actions/Counter";
-
-
-function App() {
-const count = useSelector(state =>state.countReducer);
-const log = useSelector(state =>state.logReducer);
+import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
+import { buycake } from "./redux/cake/action";
+import { buyIcecream } from "./redux/iceCream/action";
+function App( {numOfCakes,numOfIcecreams}) {
 const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <h1>Hello World</h1>
-      <h4> Count : {count} </h4>
-      <button onClick={() => dispatch(Increment())}>Add</button>
-      <button onClick={()=> dispatch(Decrement())}>Subtract</button>
-      {log? <p>Logged In</p> : <p>Logged Out</p>}
+      <h1>Number of cakes: {numOfCakes}</h1>
+      <button onClick={()=> dispatch(buycake())}>BUY CAKE</button>
+      <h1>Number of icecreams: {numOfIcecreams}</h1>
+      <button onClick ={()=> dispatch(buyIcecream())}>BUY ICE CREAMS</button>
     </div>
   );
 }
+const mapStateToProps = state =>{
+  return {
+    numOfCakes : state.cake.numOfCakes,
+    numOfIcecreams:state.ice.numOfIcecreams
+  }
+}
+export default connect(mapStateToProps)(App);
 
-export default App;
+
