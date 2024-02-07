@@ -6,7 +6,7 @@ const initState={
 
 export  const iceCreamReducer=(state=initState,action)=>{
     switch(action.type){
-        case BUY_Icecream: return{
+        case BUY_Icecream: return {
             ...state,
             numOfIcecreams : state.numOfIcecreams-1
         }
